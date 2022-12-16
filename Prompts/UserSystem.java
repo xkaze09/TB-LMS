@@ -23,7 +23,7 @@ public class UserSystem {
 
     public static void prompt() {
         // prompt initial welcome print screen
-        System.out.println("Welcome to Minecraft");
+        System.out.println("Welcome to the Learning Management System!");
         while (true) {
             System.out.println("""
                     \nEnter a command:
