@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class TeacherController {
     private static List<Feedback> givenFeedbacks;
-    private static List<Assignment> givAssignments;
+    private static List<Assignment> givenAssignments;
     private final Teacher teacher;
     private final TeacherInterface teacherInterface = new TeacherInterface();
     private final AccountsDatabase accountsDB = AccountsDatabase.INSTANCE;
@@ -27,9 +27,9 @@ public class TeacherController {
         this.scan = scan;
         // retrieve given feedbacks
         givenFeedbacks = teacher.getGivenFeedbacks();
+        // retrieve given assignments
         givenAssignments = teacher.getGivenAssignments();
 
-        // retrieve given assignments
     }
 
     public void start() {
@@ -39,7 +39,7 @@ public class TeacherController {
     private void chooseFromDashboard() {
         while (true) {
 
-            teacherView.showMyDashboard();
+            teacherInterface.showMyDashboard();
             String input = scan.nextLine();
 
             if (InputHandling.hasLetterInput(input))
@@ -52,9 +52,9 @@ public class TeacherController {
                 case 2 -> giveAssignment();
                 case 3 -> clearAssignments();
                 case 4 -> clearFeedback();
-                case 5 -> giveFeedback(); // must be see self info
-                case 6 -> giveFeedback(); // must be see given feedbacks
-                case 7 -> giveFeedback(); // must be see given assignments
+                case 5 -> teacherInterface.viewSelfInfo(teacher); // must be see self info
+                case 6 -> teacherInterface.viewGivenFeedbacks(givenFeedbacks); // must be see given feedbacks
+                case 7 -> teacherInterface.viewGivenAssignments(givenAssignments); // must be see given assignments
                 case 8 -> {
                     return;
                 }
