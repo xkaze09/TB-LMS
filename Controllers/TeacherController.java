@@ -138,6 +138,14 @@ public class TeacherController {
     }
 
     public void clearAssignments() {
+        System.out.println("""
 
+                =======================================
+                | Successfully cleared all assignments|
+                =======================================
+                """);
+
+        givenAssignments.clear();
+        FileHelper.clearFile(teacher.getAssignmentsCSV(), "StudentName,TeacherName,Assignment\n");
     }
 }
