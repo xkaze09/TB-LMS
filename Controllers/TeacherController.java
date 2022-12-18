@@ -63,7 +63,34 @@ public class TeacherController {
     }
 
     public void giveFeedback() {
+        Student student;
+        int i = 0;
 
+        if (!ListHelper.hasStudents(studentList, "feeds"))
+            return;
+
+        System.out.println("\nEnter the student's number");
+
+        for (var user : studentList) {
+            System.out.println(i + ": " + user.getFirstName());
+            i++;
+        }
+
+        System.out.print(": ");
+        int studentNumber = Integer.parseInt(scan.nextLine());
+
+        student = studentList.get(studentNumber);
+
+        System.out.print("Enter your feedback: ");
+        String feed = scan.nextLine();
+
+        Feedback feedback = new Feedback(student.getFirstName(), teacher.getFirstName(), feed);
+        givenFeedbacks.add(feedback);
+
+        // accepts the feed for the student obj to also have a reference to the feedback
+        student.getMyController().acceptFeedback(feedback);
+
+        FileHelper.writeToFile(teacher.getFeedbacksCSV(), feedback + "\n");
     }
 
     public void giveAssignment() {
