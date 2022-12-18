@@ -23,12 +23,17 @@ public class UserSystem {
 
     public static void prompt() {
         // prompt initial welcome print screen
-        System.out.println("Welcome to Minecraft");
+        System.out.println();
+        System.out.println("======================================");
+        System.out.println("|    Text-Based                      |");
+        System.out.println("|      Learning Management System    |");
+        System.out.println("======================================");
+
         while (true) {
             System.out.println("""
-                    \nEnter a command:
-                    1. Login
-                    2. Exit the program
+                    \nWhat do you want to do?:
+                    1. Login.
+                    2. Exit.
                     """);
             String input = scan.nextLine().trim();
 
