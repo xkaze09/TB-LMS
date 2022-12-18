@@ -3,7 +3,10 @@ package Controllers;
 import Database.AccountsDatabase;
 import Helpers.FileHelper;
 import Helpers.InputHandling;
+import Helpers.ListHelper;
 import Models.Student;
+import Models.Assignment;
+import Models.Feedback;
 import Models.Teacher;
 import Interfaces.TeacherInterface;
 
@@ -11,15 +14,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TeacherController {
+    private static List<Feedback> givenFeedbacks;
+    private static List<Assignment> givAssignments;
     private final Teacher teacher;
-    private final TeacherInterface teacherView = new TeacherInterface();
+    private final TeacherInterface teacherInterface = new TeacherInterface();
     private final AccountsDatabase accountsDB = AccountsDatabase.INSTANCE;
+    private final List<Student> studentList = accountsDB.getStudentList();
     private final Scanner scan;
 
     public TeacherController(Teacher teacher, Scanner scan) {
         this.teacher = teacher;
         this.scan = scan;
         // retrieve given feedbacks
+        givenFeedbacks = teacher.getGivenFeedbacks();
+        givenAssignments = teacher.getGivenAssignments();
+
         // retrieve given assignments
     }
 

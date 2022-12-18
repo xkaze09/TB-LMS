@@ -74,7 +74,7 @@ public class StudentController {
     }
 
     // for the student to also have a reference to the given feedback
-    public void acceptFeed(Feedback feedback) {
+    public void acceptFeedback(Feedback feedback) {
         studentFeedbacks.add(feedback);
     }
 }
