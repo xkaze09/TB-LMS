@@ -17,7 +17,7 @@ public class Feedback {
                 %s
                 }
                 """, teacherName, feedback) : String.format("""
-                \nTo Instructor %s: {
+                \nTo Mr./Ms. %s: {
                 %s
                 }
                 """, studentName, feedback);
