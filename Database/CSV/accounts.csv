@@ -1,5 +1,3 @@
 FirstName,LastName,Username,Password,Age,Type
-Teacher,Teacher,Teacher,Teacher,50,teacher
-Student,Student,Student,Student,20,student
-Teacher,Teacher,Teacher,Teacher,30,teacher
-Student,Student,Student,Student,21,student
+st,st,st,st,21,student
+te,te,te,te,50,teacher

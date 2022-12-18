@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class AdminController {
     private final AccountsDatabase accountsDB = AccountsDatabase.INSTANCE;
     private final List<User> accounts;
-    private final AdminInterface adminView = new AdminInterface();
+    private final AdminInterface adminInterface = new AdminInterface();
 
     private final Scanner scan;
 
@@ -26,7 +26,7 @@ public class AdminController {
 
     private void chooseFromDashboard() {
         while (true) {
-            adminView.showDashboard();
+            adminInterface.showDashboard();
             String input = scan.nextLine().trim();
 
             if (InputHandling.hasLetterInput(input))
@@ -37,7 +37,7 @@ public class AdminController {
             switch (choice) {
                 case 1 -> createAccount();
                 case 2 -> deleteAccount();
-                case 3 -> adminView.listAccounts(accounts);
+                case 3 -> adminInterface.listAccounts(accounts);
                 case 4 -> {
                     return;
                 }
