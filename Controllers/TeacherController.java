@@ -66,10 +66,10 @@ public class TeacherController {
         Student student;
         int i = 0;
 
-        if (!ListHelper.hasStudents(studentList, "feeds"))
+        if (!ListHelper.hasStudents(studentList, "feedbacks"))
             return;
 
-        System.out.println("\nEnter the student's number");
+        System.out.println("\nEnter the student number");
 
         for (var user : studentList) {
             System.out.println(i + ": " + user.getFirstName());
