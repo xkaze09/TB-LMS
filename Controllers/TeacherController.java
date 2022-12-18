@@ -126,7 +126,15 @@ public class TeacherController {
     }
 
     public void clearFeedback() {
+        System.out.println("""
 
+                =======================================
+                |  Successfully cleared all feedback  |
+                =======================================
+                """);
+
+        givenFeedbacks.clear();
+        FileHelper.clearFile(teacher.getFeedbacksCSV(), "StudentName,TeacherName,Feedback\n");
     }
 
     public void clearAssignments() {
