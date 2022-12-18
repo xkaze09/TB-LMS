@@ -99,5 +99,10 @@ public class UserSystem {
     public static void loadAccounts() {
         // loading of accounts from CSV
         // reading CSV files without overwriting everytime the program is run
+        try {
+            accounts.hasAccounts();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
