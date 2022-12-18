@@ -11,7 +11,7 @@ public class Teacher extends User {
     private static final File feedbacksCSV = new File("./Database/CSV/feedbacks.csv");
     private static final File assignmentsCSV = new File("./Database/CSV/assignments.csv");
     private final List<Feedback> givenFeedbacks = new ArrayList<>();
-    private final List<Assignment> givAssignments = new ArrayList<>();
+    private final List<Assignment> givenAssignments = new ArrayList<>();
 
     public Teacher(UserBuilder builder) {
         this.setFirstName(builder.getFirstName());
@@ -21,10 +21,26 @@ public class Teacher extends User {
         this.setAge(builder.getAge());
         this.setType(builder.getType());
         FileHelper.checkForFeedbacks(feedbacksCSV, givenFeedbacks);
-        FileHelper.checkForAssignments(assignmentsCSV, givAssignments);
+        FileHelper.checkForAssignments(assignmentsCSV, givenAssignments);
     }
+
     // To-do list:
     // Teacher must be able to do the following:
     // a. Create and check assignments
     // b. Create and check feedbacks
+    public List<Feedback> getGivenFeedbacks() {
+        return givenFeedbacks;
+    }
+
+    public List<Assignment> getGivenAssignments() {
+        return givenAssignments;
+    }
+
+    public File getFeedbacksCSV() {
+        return feedbacksCSV;
+    }
+
+    public File getAssignmentsCSV() {
+        return assignmentsCSV;
+    }
 }
