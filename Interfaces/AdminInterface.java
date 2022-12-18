@@ -7,7 +7,8 @@ import java.util.List;
 public class AdminInterface {
     public void showDashboard() {
         System.out.println("""
-                \nWhat do you want to do?
+                \nHello, admin. What do you want to do?
+
                 1. Create account (Teacher or Student)
                 2. Delete an existing account
                 3. List all existing accounts
