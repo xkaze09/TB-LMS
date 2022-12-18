@@ -1,6 +1,8 @@
 package Helpers;
 
 import Database.AccountsDatabase;
+import Models.Assignment;
+import Models.Feedback;
 import Models.Student;
 
 import java.io.*;
@@ -65,6 +67,104 @@ public class FileHelper {
 
     // To-do list:
     // 1. Function for viewing feedbacks
+
+    public static void checkForFeedbacks(File feedbacksCSV, List<Feedback> givenFeedbacks) {
+        try {
+            FileWriter feedbacksCSVWriter;
+            if (feedbacksCSV.createNewFile()) {
+                feedbacksCSVWriter = new FileWriter(feedbacksCSV, true);
+                feedbacksCSVWriter.append("StudentName,TeacherName,Feedback\n");
+                feedbacksCSVWriter.flush();
+                feedbacksCSVWriter.close();
+            } else {
+                try (Scanner scanFeeds = new Scanner(feedbacksCSV)) {
+                    String header = scanFeeds.nextLine();
+                    Student student = null;
+                    String line;
+
+                    while (scanFeeds.hasNextLine()) {
+                        line = scanFeeds.nextLine();
+
+                        if (line == null)
+                            return;
+                        if (studentList.size() == 0)
+                            return;
+
+                        String[] data = line.split(",");
+
+                        for (var user : studentList) {
+                            if (user.getFirstName().equals(data[0])) {
+                                student = user;
+                                break;
+                            }
+                        }
+
+                        // if no student matched from the line, we'll check next line
+                        if (student == null)
+                            break;
+
+                        Feedback feedback = new Feedback(student.getFirstName(), data[1], data[2]);
+                        givenFeedbacks.add(feedback);
+                        student.getMyController().acceptFeedback(feedback);
+
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // 2. Function for viewing assignments
+    public static void checkForAssignments(File assignmentsCSV, List<Assignment> givenAssignments) {
+        try {
+            if (assignmentsCSV.createNewFile()) {
+                FileWriter assignmentsCSVWriter = new FileWriter(assignmentsCSV, true);
+                assignmentsCSVWriter.append("StudentName,TeacherName,Assignment\n");
+                assignmentsCSVWriter.flush();
+                assignmentsCSVWriter.close();
+            } else {
+                try (Scanner scanAssignments = new Scanner(assignmentsCSV)) {
+                    String header = scanAssignments.nextLine();
+                    Student student = null;
+                    String line;
+
+                    while (scanAssignments.hasNextLine()) {
+                        line = scanAssignments.nextLine();
+
+                        if (line == null)
+                            return;
+                        if (studentList.size() == 0)
+                            return;
+
+                        String[] data = line.split(",");
+
+                        for (var user : studentList) {
+                            if (user.getFirstName().equals(data[0])) {
+                                student = user;
+                                break;
+                            }
+                        }
+
+                        // if no student matched from the line, we'll check next line
+                        if (student == null)
+                            break;
+
+                        Assignment assignment = new Assignment(student.getFirstName(), data[1], data[2]);
+                        givenAssignments.add(assignment);
+                        student.getMyController().acceptAssignment(assignment);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
