@@ -25,9 +25,9 @@ public class AccountsDatabase {
 
     public void createAccount() {
         System.out.println("""
-                            Create What type of account?
-                            0. Student
-                            1. Teacher
+                    Create what type of account?
+                    0. Student
+                    1. Teacher
                 """);
 
         int choice = Integer.parseInt(scan.nextLine());
