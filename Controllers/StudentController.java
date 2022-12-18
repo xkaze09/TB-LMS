@@ -28,6 +28,53 @@ public class StudentController {
     }
 
     private void chooseFromDashboard() {
-        // mark an assignment as done
+        while (true) {
+            studentInterface.showMyDashboard();
+            String input = scan.nextLine().trim();
+
+            int choice = Integer.parseInt(input);
+
+            switch (choice) {
+                case 1 -> studentInterface.viewMyAssignments(studentAssignments);
+                case 2 -> studentInterface.viewMyFeedbacks(studentFeedbacks);
+                case 3 -> markAssignment();
+                case 4 -> studentInterface.viewSelfInfo(student);
+                case 5 -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    private void markAssignment() {
+        int i = 0;
+
+        if (!ListHelper.hasAssignments(studentAssignments))
+            return;
+
+        System.out.println("""
+                WARNING: Marking an assignment as done will not be saved when you exit.
+                Hence, when you log back again, you won't see [COMPLETED] with it.
+                """);
+
+        for (var assignment : studentAssignments) {
+            System.out.println(i + ": " + assignment.getAssignment(true));
+            i++;
+        }
+
+        System.out.print("Enter the assignment you want to mark as completed: ");
+        int index = Integer.parseInt(scan.nextLine());
+
+        studentAssignments.get(index).markAsCompleted();
+    }
+
+    // for the student to also have a reference to the given assignment
+    public void acceptAssignment(Assignment assignment) {
+        studentAssignments.add(assignment);
+    }
+
+    // for the student to also have a reference to the given feedback
+    public void acceptFeed(Feedback feedback) {
+        studentFeedbacks.add(feedback);
     }
 }
