@@ -94,7 +94,35 @@ public class TeacherController {
     }
 
     public void giveAssignment() {
+        Student student;
+        int i = 0;
 
+        if (!ListHelper.hasStudents(studentList, "assignments"))
+            return;
+
+        System.out.println("\nEnter the student number");
+
+        for (var user : studentList) {
+            System.out.println(i + ": " + user.getFirstName());
+            i++;
+        }
+
+        System.out.print(": ");
+        int studentNumber = Integer.parseInt(scan.nextLine());
+
+        student = studentList.get(studentNumber);
+
+        System.out.print("Enter the assignment: ");
+        String givenAssignment = scan.nextLine();
+
+        Assignment assignment = new Assignment(student.getFirstName(), teacher.getFirstName(), givenAssignment);
+        givenAssignments.add(assignment);
+        student.getMyController().acceptAssignment(assignment); // accepts the assignment for the student obj to also
+                                                                // have a
+                                                                // reference to
+        // the assignment
+
+        FileHelper.writeToFile(teacher.getAssignmentsCSV(), assignment + "\n");
     }
 
     public void clearFeedback() {
