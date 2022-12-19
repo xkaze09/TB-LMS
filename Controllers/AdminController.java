@@ -1,15 +1,15 @@
 package Controllers;
 
-import Database.AccountsDatabase;
-import Helpers.InputHandling;
-import Models.User;
+import Database.AccountsDB;
+import Helpers.InputHelper;
 import Interfaces.AdminInterface;
+import Models.User;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class AdminController {
-    private final AccountsDatabase accountsDB = AccountsDatabase.INSTANCE;
+    private final AccountsDB accountsDB = AccountsDB.INSTANCE;
     private final List<User> accounts;
     private final AdminInterface adminInterface = new AdminInterface();
 
@@ -29,7 +29,7 @@ public class AdminController {
             adminInterface.showDashboard();
             String input = scan.nextLine().trim();
 
-            if (InputHandling.hasLetterInput(input))
+            if (InputHelper.hasLetterInput(input))
                 continue;
 
             int choice = Integer.parseInt(input);

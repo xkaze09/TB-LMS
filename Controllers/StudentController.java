@@ -1,19 +1,19 @@
 package Controllers;
 
-import Helpers.ListHelper;
-import Models.Feedback;
-import Models.Student;
-import Models.Assignment;
-import Interfaces.StudentInterface;
-
 import java.util.List;
 import java.util.Scanner;
+
+import Helpers.ListHelper;
+import Interfaces.StudentInterface;
+import Models.Feedback;
+import Models.Student;
+import Models.Assignments;
 
 public class StudentController {
     private final Student student;
     private final StudentInterface studentInterface = new StudentInterface();
     private final List<Feedback> studentFeedbacks;
-    private final List<Assignment> studentAssignments;
+    private final List<Assignments> studentAssignments;
     private final Scanner scan = new Scanner(System.in);
 
     public StudentController(Student student) {
@@ -38,7 +38,7 @@ public class StudentController {
                 case 1 -> studentInterface.viewMyAssignments(studentAssignments);
                 case 2 -> studentInterface.viewMyFeedbacks(studentFeedbacks);
                 case 3 -> markAssignment();
-                case 4 -> studentInterface.viewSelfInfo(student);
+                case 4 -> studentInterface.viewMyInfo(student);
                 case 5 -> {
                     return;
                 }
@@ -68,8 +68,8 @@ public class StudentController {
         studentAssignments.get(index).markAsCompleted();
     }
 
-    // for the student to also have a reference to the given assignment
-    public void acceptAssignment(Assignment assignment) {
+    // for the student to also have a reference to the given task
+    public void acceptAssignment(Assignments assignment) {
         studentAssignments.add(assignment);
     }
 

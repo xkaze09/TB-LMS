@@ -1,24 +1,25 @@
 package Controllers;
 
-import Database.AccountsDatabase;
+import Database.AccountsDB;
 import Helpers.FileHelper;
-import Helpers.InputHandling;
+import Helpers.InputHelper;
 import Helpers.ListHelper;
-import Models.Student;
-import Models.Assignment;
-import Models.Feedback;
-import Models.Teacher;
 import Interfaces.TeacherInterface;
+import Models.Feedback;
+import Models.Student;
+import Models.Assignments;
+import Models.Teacher;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class TeacherController {
-    private static List<Feedback> givenFeedbacks;
-    private static List<Assignment> givenAssignments;
+
+    private static List<Feedback> givenFeeds;
+    private static List<Assignments> givenAssignments;
     private final Teacher teacher;
     private final TeacherInterface teacherInterface = new TeacherInterface();
-    private final AccountsDatabase accountsDB = AccountsDatabase.INSTANCE;
+    private final AccountsDB accountsDB = AccountsDB.INSTANCE;
     private final List<Student> studentList = accountsDB.getStudentList();
     private final Scanner scan;
 
@@ -26,10 +27,9 @@ public class TeacherController {
         this.teacher = teacher;
         this.scan = scan;
         // retrieve given feedbacks
-        givenFeedbacks = teacher.getGivenFeedbacks();
+        givenFeeds = teacher.getGivenFeedbacks();
         // retrieve given assignments
         givenAssignments = teacher.getGivenAssignments();
-
     }
 
     public void start() {
@@ -42,7 +42,7 @@ public class TeacherController {
             teacherInterface.showMyDashboard();
             String input = scan.nextLine();
 
-            if (InputHandling.hasLetterInput(input))
+            if (InputHelper.hasLetterInput(input))
                 continue;
 
             int choice = Integer.parseInt(input);
@@ -51,9 +51,9 @@ public class TeacherController {
                 case 1 -> giveFeedback();
                 case 2 -> giveAssignment();
                 case 3 -> clearAssignments();
-                case 4 -> clearFeedback();
-                case 5 -> teacherInterface.viewSelfInfo(teacher); // must be see self info
-                case 6 -> teacherInterface.viewGivenFeedbacks(givenFeedbacks); // must be see given feedbacks
+                case 4 -> clearFeedbacks();
+                case 5 -> teacherInterface.viewMyInfo(teacher); // must be see self info
+                case 6 -> teacherInterface.viewGivenFeedbacks(givenFeeds); // must be see given feedbacks
                 case 7 -> teacherInterface.viewGivenAssignments(givenAssignments); // must be see given assignments
                 case 8 -> {
                     return;
@@ -66,7 +66,7 @@ public class TeacherController {
         Student student;
         int i = 0;
 
-        if (!ListHelper.hasStudents(studentList, "feedbacks"))
+        if (!ListHelper.hasStudents(studentList, "feeds"))
             return;
 
         System.out.println("\nEnter the student number");
@@ -85,7 +85,7 @@ public class TeacherController {
         String feed = scan.nextLine();
 
         Feedback feedback = new Feedback(student.getFirstName(), teacher.getFirstName(), feed);
-        givenFeedbacks.add(feedback);
+        givenFeeds.add(feedback);
 
         // accepts the feed for the student obj to also have a reference to the feedback
         student.getMyController().acceptFeedback(feedback);
@@ -113,36 +113,35 @@ public class TeacherController {
         student = studentList.get(studentNumber);
 
         System.out.print("Enter the assignment: ");
-        String givenAssignment = scan.nextLine();
+        String givenTask = scan.nextLine();
 
-        Assignment assignment = new Assignment(student.getFirstName(), teacher.getFirstName(), givenAssignment);
+        Assignments assignment = new Assignments(student.getFirstName(), teacher.getFirstName(), givenTask);
         givenAssignments.add(assignment);
         student.getMyController().acceptAssignment(assignment); // accepts the assignment for the student obj to also
-                                                                // have a
-                                                                // reference to
+                                                                // have a reference to
         // the assignment
 
         FileHelper.writeToFile(teacher.getAssignmentsCSV(), assignment + "\n");
     }
 
-    public void clearFeedback() {
+    public void clearFeedbacks() {
         System.out.println("""
 
-                =======================================
-                |  Successfully cleared all feedback  |
-                =======================================
+                ========================================
+                |   Successfully cleared all feedback  |
+                ========================================
                 """);
 
-        givenFeedbacks.clear();
+        givenFeeds.clear();
         FileHelper.clearFile(teacher.getFeedbacksCSV(), "StudentName,TeacherName,Feedback\n");
     }
 
     public void clearAssignments() {
         System.out.println("""
 
-                =======================================
-                | Successfully cleared all assignments|
-                =======================================
+                ========================================
+                | Successfully cleared all assignments |
+                ========================================
                 """);
 
         givenAssignments.clear();
