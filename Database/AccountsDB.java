@@ -74,14 +74,13 @@ public class AccountsDB {
     public void deleteAccount() {
         listAccounts();
 
-        System.out.println("\nEnter the username of the account");
-        System.out.print(": ");
+        System.out.println("\nEnter the username of the account: ");
         String username = scan.nextLine();
 
         if (username.equals("admin")) {
-            System.out.println("\n=======================");
-            System.out.println("Cannot remove admin!");
-            System.out.println("=======================");
+            System.out.println("=======================================");
+            System.out.println("|   Deletion failed: User is admin    |");
+            System.out.println("=======================================");
             return;
         }
 
@@ -99,13 +98,13 @@ public class AccountsDB {
         if (result) {
             users.remove(userToBeDeleted);
             studentList.remove(userToBeDeleted);
-            System.out.println("\n===========");
-            System.out.println("Success!");
-            System.out.println("===========");
+            System.out.println("=======================================");
+            System.out.println("|          Deletion successful        |");
+            System.out.println("=======================================");
         } else {
-            System.out.println("\n===========");
-            System.out.println("Not found!");
-            System.out.println("===========");
+            System.out.println("=======================================");
+            System.out.println("|   Deletion failed: User not found   |");
+            System.out.println("=======================================");
         }
 
         updateAccountsCSV(username);

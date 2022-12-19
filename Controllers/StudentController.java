@@ -53,6 +53,7 @@ public class StudentController {
             return;
 
         System.out.println("""
+
                 WARNING: Marking an assignment as done will not be saved when you exit.
                 Hence, when you log back again, you won't see [COMPLETED] with it.
                 """);
