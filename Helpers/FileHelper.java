@@ -1,16 +1,16 @@
 package Helpers;
 
-import Database.AccountsDatabase;
-import Models.Assignment;
+import Database.AccountsDB;
 import Models.Feedback;
 import Models.Student;
+import Models.Assignments;
 
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileHelper {
-    private static final List<Student> studentList = AccountsDatabase.INSTANCE.getStudentList();
+    private static final List<Student> studentList = AccountsDB.INSTANCE.getStudentList();
 
     public static void clearFile(File target, String header) {
         FileWriter writer;
@@ -65,19 +65,16 @@ public class FileHelper {
         }
     }
 
-    // To-do list:
-    // 1. Function for viewing feedbacks
-
-    public static void checkForFeedbacks(File feedbacksCSV, List<Feedback> givenFeedbacks) {
+    public static void checkForFeedbacks(File feedsCSV, List<Feedback> givenFeeds) {
         try {
-            FileWriter feedbacksCSVWriter;
-            if (feedbacksCSV.createNewFile()) {
-                feedbacksCSVWriter = new FileWriter(feedbacksCSV, true);
-                feedbacksCSVWriter.append("StudentName,TeacherName,Feedback\n");
-                feedbacksCSVWriter.flush();
-                feedbacksCSVWriter.close();
+            FileWriter feedsCSVWriter;
+            if (feedsCSV.createNewFile()) {
+                feedsCSVWriter = new FileWriter(feedsCSV, true);
+                feedsCSVWriter.append("StudentName,TeacherName,Feedback\n");
+                feedsCSVWriter.flush();
+                feedsCSVWriter.close();
             } else {
-                try (Scanner scanFeeds = new Scanner(feedbacksCSV)) {
+                try (Scanner scanFeeds = new Scanner(feedsCSV)) {
                     String header = scanFeeds.nextLine();
                     Student student = null;
                     String line;
@@ -104,7 +101,7 @@ public class FileHelper {
                             break;
 
                         Feedback feedback = new Feedback(student.getFirstName(), data[1], data[2]);
-                        givenFeedbacks.add(feedback);
+                        givenFeeds.add(feedback);
                         student.getMyController().acceptFeedback(feedback);
 
                     }
@@ -118,8 +115,7 @@ public class FileHelper {
         }
     }
 
-    // 2. Function for viewing assignments
-    public static void checkForAssignments(File assignmentsCSV, List<Assignment> givenAssignments) {
+    public static void checkForAssignments(File assignmentsCSV, List<Assignments> givenAssignments) {
         try {
             if (assignmentsCSV.createNewFile()) {
                 FileWriter assignmentsCSVWriter = new FileWriter(assignmentsCSV, true);
@@ -153,9 +149,9 @@ public class FileHelper {
                         if (student == null)
                             break;
 
-                        Assignment assignment = new Assignment(student.getFirstName(), data[1], data[2]);
-                        givenAssignments.add(assignment);
-                        student.getMyController().acceptAssignment(assignment);
+                        Assignments task = new Assignments(student.getFirstName(), data[1], data[2]);
+                        givenAssignments.add(task);
+                        student.getMyController().acceptAssignment(task);
                     }
 
                 } catch (IOException e) {

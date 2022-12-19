@@ -1,10 +1,13 @@
 package Helpers;
 
-public class InputHandling {
+public class InputHelper {
     public static boolean hasLetterInput(String input) {
         if (input.matches("[A-Za-z]*")) {
             System.out.println("""
-                    Enter numbers only.
+
+                    =======================================
+                    |      Please enter numbers only.     |
+                    =======================================
                     """);
             return true;
         }

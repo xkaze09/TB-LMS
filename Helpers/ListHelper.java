@@ -1,10 +1,10 @@
 package Helpers;
 
+import java.util.List;
+
 import Models.Feedback;
 import Models.Student;
-import Models.Assignment;
-
-import java.util.List;
+import Models.Assignments;
 
 public class ListHelper {
     public static boolean hasFeedbacks(List<Feedback> list) {
@@ -20,7 +20,7 @@ public class ListHelper {
         return true;
     }
 
-    public static boolean hasAssignments(List<Assignment> list) {
+    public static boolean hasAssignments(List<Assignments> list) {
         if (list.size() == 0) {
             System.out.println("""
 
