@@ -2,10 +2,8 @@ package Models;
 
 import Exceptions.InvalidAccountTypeException;
 
-// add exception
-
 public abstract class User {
-    // initializations
+    // required
     private String firstName;
     private String lastName;
     private String username;
@@ -13,17 +11,18 @@ public abstract class User {
     private Integer age;
     private String type;
 
-    public void viewSelfInfo() {
-        // view own account info
+    public void viewMyInfo() {
         System.out.printf("""
-                \n========= Account Information =========
+                \n=======================
                 First Name: %s
-                Last Name:  %s
-                Username:   %s
-                Password:   %s
-                Age:        %d
-                =======================================
-                """, this.getFirstName(), this.getLastName(), this.getUsername(), this.getPassword(), this.getAge());
+                Last Name: %s
+                Username: %s
+                Password: %s
+                Age: %d
+                Account Type: %s
+                =======================
+                """, this.getFirstName(), this.getLastName(), this.getUsername(), this.getPassword(), this.getAge(),
+                this.getType());
     }
 
     // getters and setters
@@ -112,7 +111,7 @@ public abstract class User {
                 case "teacher" -> {
                     return new Teacher(this);
                 }
-                default -> throw new InvalidAccountTypeException("Error: Invalid account type!");
+                default -> throw new InvalidAccountTypeException("Invalid account type!");
             }
         }
 

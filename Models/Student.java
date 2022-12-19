@@ -1,15 +1,13 @@
 package Models;
 
-import Controllers.StudentController;
-
-// For reading CSV files
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controllers.StudentController;
+
 public class Student extends User {
-    private final List<Feedback> myFeedbacks = new ArrayList<>();
-    private final List<Assignment> myAssignments = new ArrayList<>();
+    private final List<Feedback> myFeeds = new ArrayList<>();
+    private final List<Assignments> myFeedbacks = new ArrayList<>();
     private StudentController myController;
 
     public Student(UserBuilder builder) {
@@ -21,17 +19,12 @@ public class Student extends User {
         this.setType(builder.getType());
     }
 
-    // To-do list:
-    // Student must be able to do the following:
-    // a. View assignments by teacher
-    // b. View feedbacks by teacher
-    // c. Mark assignments as done
     public List<Feedback> getMyFeedbacks() {
-        return myFeedbacks;
+        return myFeeds;
     }
 
-    public List<Assignment> getMyAssignments() {
-        return myAssignments;
+    public List<Assignments> getMyAssignments() {
+        return myFeedbacks;
     }
 
     public StudentController getMyController() {

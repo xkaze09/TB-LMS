@@ -13,7 +13,7 @@ public class Feedback {
 
     public String getFeedback(boolean isStudent) {
         return (isStudent) ? String.format("""
-                \nFrom Instructor %s: {
+                \nFrom Mr./Ms. %s: {
                 %s
                 }
                 """, teacherName, feedback) : String.format("""
@@ -28,4 +28,5 @@ public class Feedback {
     public String toString() {
         return studentName + "," + teacherName + "," + feedback;
     }
+
 }

@@ -1,17 +1,16 @@
 package Models;
 
-import Helpers.FileHelper;
-
-// For reading CSV files
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import Helpers.FileHelper;
 
 public class Teacher extends User {
     private static final File feedbacksCSV = new File("./Database/CSV/feedbacks.csv");
     private static final File assignmentsCSV = new File("./Database/CSV/assignments.csv");
     private final List<Feedback> givenFeedbacks = new ArrayList<>();
-    private final List<Assignment> givenAssignments = new ArrayList<>();
+    private final List<Assignments> givenAssignments = new ArrayList<>();
 
     public Teacher(UserBuilder builder) {
         this.setFirstName(builder.getFirstName());
@@ -24,15 +23,11 @@ public class Teacher extends User {
         FileHelper.checkForAssignments(assignmentsCSV, givenAssignments);
     }
 
-    // To-do list:
-    // Teacher must be able to do the following:
-    // a. Create and check assignments
-    // b. Create and check feedbacks
     public List<Feedback> getGivenFeedbacks() {
         return givenFeedbacks;
     }
 
-    public List<Assignment> getGivenAssignments() {
+    public List<Assignments> getGivenAssignments() {
         return givenAssignments;
     }
 
@@ -43,4 +38,5 @@ public class Teacher extends User {
     public File getAssignmentsCSV() {
         return assignmentsCSV;
     }
+
 }

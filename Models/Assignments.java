@@ -1,11 +1,11 @@
 package Models;
 
-public class Assignment {
+public class Assignments {
     private final String studentName;
     private final String teacherName;
     private String assignment;
 
-    public Assignment(String studentName, String teacherName, String assignment) {
+    public Assignments(String studentName, String teacherName, String assignment) {
         this.studentName = studentName;
         this.teacherName = teacherName;
         this.assignment = assignment;
@@ -17,7 +17,7 @@ public class Assignment {
                 %s
                 }
                 """, teacherName, assignment) : String.format("""
-                \nGiven to Mr./Ms. %s: {
+                \nGiven to Mr/Ms %s: {
                 %s
                 }
                 """, studentName, assignment);
