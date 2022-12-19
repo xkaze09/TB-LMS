@@ -1,10 +1,10 @@
-import Prompts.UserSystem;
+import Prompts.LoginSystem;
 
 public class Main {
     public static void main(String[] args) {
         // Load system
-        UserSystem.loadAccounts();
+        LoginSystem.loadAccounts();
         // Prompt login/register
-        UserSystem.prompt();
+        LoginSystem.prompt();
     }
 }
