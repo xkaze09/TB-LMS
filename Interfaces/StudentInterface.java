@@ -20,8 +20,6 @@ public class StudentInterface {
                 4. View my account information
                 5. Logout
                 """);
-
-        System.out.print(": ");
     }
 
     // Displays a list of the student's assignments.

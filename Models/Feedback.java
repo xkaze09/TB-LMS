@@ -18,7 +18,6 @@ public class Feedback {
     public String getFeedback(boolean isStudent) {
         return (isStudent) ? String.format("""
                 \nFrom Mr./Ms. %s: %s
-                }
                 """, teacherName, feedback) : String.format("""
                 \nTo Mr./Ms. %s: %s
                 """, studentName, feedback);

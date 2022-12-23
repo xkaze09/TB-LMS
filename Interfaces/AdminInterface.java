@@ -16,7 +16,6 @@ public class AdminInterface {
                 3. List all existing accounts
                 4. Logout
                 """);
-        System.out.print(": ");
     }
 
     // Lists all existing accounts in the system, excluding the admin user.

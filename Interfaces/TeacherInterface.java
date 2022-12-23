@@ -23,7 +23,6 @@ public class TeacherInterface {
                 7. View given assignments
                 8. Logout
                 """);
-        System.out.print(": ");
     }
 
     // Displays all feedbacks given by the teacher

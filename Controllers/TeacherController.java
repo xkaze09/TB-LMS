@@ -109,7 +109,6 @@ public class TeacherController {
             i++;
         }
 
-        System.out.print(": ");
         int studentNumber = Integer.parseInt(scan.nextLine());
 
         student = studentList.get(studentNumber);
