@@ -168,6 +168,7 @@ public class AccountsDB {
         }
     }
 
+    // Lists all the existing accounts in the database
     public void listAccounts() {
         for (var user : users) {
             // skips the admin
