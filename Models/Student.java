@@ -1,8 +1,10 @@
 package Models;
 
+// imports from Java
 import java.util.ArrayList;
 import java.util.List;
 
+// imports from package
 import Controllers.StudentController;
 
 public class Student extends User {

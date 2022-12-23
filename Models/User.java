@@ -1,5 +1,6 @@
 package Models;
 
+// imports from package
 import Exceptions.InvalidAccountTypeException;
 
 public abstract class User {

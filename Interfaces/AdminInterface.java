@@ -1,7 +1,9 @@
 package Interfaces;
 
+// imports from Java
 import java.util.List;
 
+// imports from package
 import Models.User;
 
 public class AdminInterface {

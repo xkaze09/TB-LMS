@@ -1,9 +1,11 @@
 package Models;
 
+// imports from Java
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+// imports from package
 import Helpers.FileHelper;
 
 public class Teacher extends User {
