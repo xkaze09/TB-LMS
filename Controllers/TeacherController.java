@@ -1,5 +1,10 @@
 package Controllers;
 
+// imports from Java
+import java.util.List;
+import java.util.Scanner;
+
+// imports from package
 import Database.AccountsDB;
 import Helpers.FileHelper;
 import Helpers.InputHelper;
@@ -9,9 +14,6 @@ import Models.Feedback;
 import Models.Student;
 import Models.Assignments;
 import Models.Teacher;
-
-import java.util.List;
-import java.util.Scanner;
 
 public class TeacherController {
 
