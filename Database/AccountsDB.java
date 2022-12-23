@@ -1,5 +1,6 @@
 package Database;
 
+// imports from Java
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// imports from package
 import Controllers.StudentController;
 import Helpers.FileHelper;
 import Models.Admin;
@@ -21,10 +23,13 @@ public class AccountsDB {
     private final List<Student> studentList = new ArrayList<>();
     private final Scanner scan = new Scanner(System.in);
 
+    // part of the constructor class for AccountsDB.
+    // Creates new admin object and adds it to users list
     private AccountsDB() {
         users.add(new Admin());
     }
 
+    // Prompt user to create what type of account
     public void createAccount() {
         System.out.println("""
                 TB-LMS >> Create what type of account?
@@ -71,6 +76,7 @@ public class AccountsDB {
                 newUser.getUsername(), newUser.getPassword(), newUser.getAge(), newUser.getType()));
     }
 
+    // Prompt the user to delete which account
     public void deleteAccount() {
         listAccounts();
 
@@ -110,6 +116,17 @@ public class AccountsDB {
         updateAccountsCSV(username);
     }
 
+    /*
+     * This method takes a username as an argument and it uses a Scanner object to
+     * read through
+     * the accounts CSV file. It creates a new temp file and
+     * writes the lines of other accounts to the temp file, except for the line of
+     * the account that needs to be deleted.
+     * Once the writing is done, the temp file is renamed to the old file to update
+     * it.
+     * The listAccounts() method then iterates through the list of users and prints
+     * the username and password of each user, except for the admin.
+     */
     private void updateAccountsCSV(String username) {
         File tempFile = new File("./Database/CSV/accountsTemp.csv");
         /// copies the content of the accounts CSV and skipping the deleted line
@@ -178,6 +195,12 @@ public class AccountsDB {
         FileHelper.writeToFile(accountsCSV, "FirstName,LastName,Username,Password,Age,Type\n");
     }
 
+    /*
+     * This method reads in a .csv file with user information and creates a User
+     * object for each line.
+     * It also adds the user to the 'users' list and if the user is a student, it
+     * adds them to the 'studentList' and creates a StudentController.
+     */
     private void readAccounts() {
         try (Scanner scanAccount = new Scanner(accountsCSV)) {
             String header = scanAccount.nextLine();

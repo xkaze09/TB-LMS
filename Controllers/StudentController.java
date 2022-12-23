@@ -1,8 +1,10 @@
 package Controllers;
 
+// imports from Java
 import java.util.List;
 import java.util.Scanner;
 
+// imports from package
 import Helpers.ListHelper;
 import Interfaces.StudentInterface;
 import Models.Feedback;
@@ -23,10 +25,12 @@ public class StudentController {
         student.setMyController(this);
     }
 
+    // Function to start student dashboard
     public void start() {
         chooseFromDashboard();
     }
 
+    // Function to prompt student dashboard
     private void chooseFromDashboard() {
         while (true) {
             studentInterface.showMyDashboard();
@@ -34,6 +38,7 @@ public class StudentController {
 
             int choice = Integer.parseInt(input);
 
+            // Prompt choices
             switch (choice) {
                 case 1 -> studentInterface.viewMyAssignments(studentAssignments);
                 case 2 -> studentInterface.viewMyFeedbacks(studentFeedbacks);
@@ -46,6 +51,7 @@ public class StudentController {
         }
     }
 
+    // Function for student to mark assignment as complete
     private void markAssignment() {
         int i = 0;
 

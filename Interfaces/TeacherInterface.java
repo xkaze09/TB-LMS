@@ -8,6 +8,7 @@ import Models.Assignments;
 import Models.Teacher;
 
 public class TeacherInterface {
+    // Displays the dashboard menu for the teacher user.
     public void showMyDashboard() {
         System.out.println("""
 
@@ -25,18 +26,21 @@ public class TeacherInterface {
         System.out.print(": ");
     }
 
+    // Displays all feedbacks given by the teacher
     public void viewGivenFeedbacks(List<Feedback> teacherGivenFeedbacks) {
         if (!ListHelper.hasFeedbacks(teacherGivenFeedbacks))
             return;
         teacherGivenFeedbacks.forEach(feedback -> System.out.println(feedback.getFeedback(false)));
     }
 
+    // Displays all assignments given by the teacher
     public void viewGivenAssignments(List<Assignments> teacherGivenAssignments) {
         if (!ListHelper.hasAssignments(teacherGivenAssignments))
             return;
         teacherGivenAssignments.forEach(assignment -> System.out.println(assignment.getAssignment(false)));
     }
 
+    // Displays the teacher's information.
     public void viewMyInfo(Teacher teacher) {
         teacher.viewMyInfo();
     }

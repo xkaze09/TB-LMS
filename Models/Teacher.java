@@ -12,6 +12,10 @@ public class Teacher extends User {
     private final List<Feedback> givenFeedbacks = new ArrayList<>();
     private final List<Assignments> givenAssignments = new ArrayList<>();
 
+    /*
+     * Constructor for the Teacher class that sets fields from a UserBuilder object
+     * and checks for existing feedbacks and assignments from CSV files
+     */
     public Teacher(UserBuilder builder) {
         this.setFirstName(builder.getFirstName());
         this.setLastName(builder.getLastName());
@@ -23,18 +27,22 @@ public class Teacher extends User {
         FileHelper.checkForAssignments(assignmentsCSV, givenAssignments);
     }
 
+    // Returns the list of feedbacks given by a teacher
     public List<Feedback> getGivenFeedbacks() {
         return givenFeedbacks;
     }
 
+    // Returns the list of assignments given by a teacher
     public List<Assignments> getGivenAssignments() {
         return givenAssignments;
     }
 
+    // Returns the feedbacks CSV file
     public File getFeedbacksCSV() {
         return feedbacksCSV;
     }
 
+    // Returns the assignments CSV file
     public File getAssignmentsCSV() {
         return assignmentsCSV;
     }

@@ -44,7 +44,6 @@ public class LoginSystem {
                     2. Exit.
                     """);
 
-            System.out.print(": ");
             String input = scan.nextLine().trim();
 
             if (InputHelper.hasLetterInput(input))
@@ -115,4 +114,115 @@ public class LoginSystem {
             throw new RuntimeException(e);
         }
     }
+
+    public class LoginSystemTest {
+
+        // Declare the variables and objects
+        private static Scanner scan;
+        private static AccountsDB accounts;
+        private static List<User> users;
+        private static User account;
+        private static String accountType;
+        private static InputHelper inputHelper;
+        private static AdminController adminController;
+        private static StudentController studentController;
+        private static TeacherController teacherController;
+        private static String username;
+        private static String password;
+
+        // Initialize the variables and objects
+        public void setUp() {
+            scan = new Scanner(System.in);
+            accounts = AccountsDB.INSTANCE;
+            users = accounts.getUsers();
+            account = null;
+            accountType = "";
+            inputHelper = new InputHelper();
+            adminController = new AdminController(scan);
+            studentController = new StudentController((Student) account);
+            teacherController = new TeacherController((Teacher) account, scan);
+            username = "";
+            password = "";
+        }
+
+        // Execute the test
+        public static void testLogin() {
+            // Test 1 - Login with valid credentials
+            username = "admin";
+            password = "password";
+            for (var user : users) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    account = user;
+                    accountType = account.getType();
+                    break;
+                }
+            }
+            switch (accountType) {
+                case "admin" -> {
+                    adminController.start();
+                }
+                case "student" -> {
+                    studentController.start();
+                }
+                case "teacher" -> {
+                    teacherController.start();
+                }
+                default -> {
+                    System.out.println("""
+
+                            =======================================
+                            |       Error: Account not found.     |
+                            =======================================
+                            """);
+                    LoginSystem.prompt();
+                }
+            }
+            // Test 2 - Login with invalid credentials
+            username = "invaliduser";
+            password = "invalidpassword";
+            for (var user : users) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    account = user;
+                    accountType = account.getType();
+                    break;
+                }
+            }
+            switch (accountType) {
+                case "admin" -> {
+                    adminController.start();
+                }
+                case "student" -> {
+                    studentController.start();
+                }
+                case "teacher" -> {
+                    teacherController.start();
+                }
+                default -> {
+                    System.out.println("""
+
+                            =======================================
+                            |       Error: Account not found.     |
+                            =======================================
+                            """);
+                    LoginSystem.prompt();
+                }
+            }
+        }
+
+        // Tear down the variables and objects
+        public void tearDown() {
+            scan = null;
+            accounts = null;
+            users = null;
+            account = null;
+            accountType = null;
+            inputHelper = null;
+            adminController = null;
+            studentController = null;
+            teacherController = null;
+            username = null;
+            password = null;
+        }
+    }
+
 }

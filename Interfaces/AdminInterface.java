@@ -5,6 +5,7 @@ import java.util.List;
 import Models.User;
 
 public class AdminInterface {
+    // Displays the dashboard menu for the admin user.
     public void showDashboard() {
         System.out.println("""
 
@@ -18,6 +19,7 @@ public class AdminInterface {
         System.out.print(": ");
     }
 
+    // Lists all existing accounts in the system, excluding the admin user.
     public void listAccounts(List<User> accounts) {
         int totalAccounts = 1;
         for (var user : accounts) {

@@ -32,10 +32,12 @@ public class TeacherController {
         givenAssignments = teacher.getGivenAssignments();
     }
 
+    // Function to start teacher dashboard
     public void start() {
         chooseFromDashboard();
     }
 
+    // Function to prompt teacher dashboard
     private void chooseFromDashboard() {
         while (true) {
 
@@ -47,6 +49,7 @@ public class TeacherController {
 
             int choice = Integer.parseInt(input);
 
+            // Prompt choices
             switch (choice) {
                 case 1 -> giveFeedback();
                 case 2 -> giveAssignment();
@@ -69,14 +72,13 @@ public class TeacherController {
         if (!ListHelper.hasStudents(studentList, "feeds"))
             return;
 
-        System.out.println("\nEnter the student number");
+        System.out.println("\nEnter the student number: ");
 
         for (var user : studentList) {
             System.out.println(i + ": " + user.getFirstName());
             i++;
         }
 
-        System.out.print(": ");
         int studentNumber = Integer.parseInt(scan.nextLine());
 
         student = studentList.get(studentNumber);

@@ -8,6 +8,7 @@ import Models.Student;
 import Models.Assignments;
 
 public class StudentInterface {
+    // Displays the dashboard menu for the student user.
     public void showMyDashboard() {
         System.out.println("""
 
@@ -23,6 +24,7 @@ public class StudentInterface {
         System.out.print(": ");
     }
 
+    // Displays a list of the student's assignments.
     public void viewMyAssignments(List<Assignments> studentTasks) {
         if (!ListHelper.hasAssignments(studentTasks))
             return;
@@ -30,6 +32,7 @@ public class StudentInterface {
         studentTasks.forEach(task -> System.out.println(task.getAssignment(true)));
     }
 
+    // Displays a list of the student's feedbacks.
     public void viewMyFeedbacks(List<Feedback> studentFeedbacks) {
         if (!ListHelper.hasFeedbacks(studentFeedbacks))
             return;
@@ -37,6 +40,7 @@ public class StudentInterface {
         studentFeedbacks.forEach(feedback -> System.out.println(feedback.getFeedback(true)));
     }
 
+    // Displays the student's information.
     public void viewMyInfo(Student student) {
         student.viewMyInfo();
     }

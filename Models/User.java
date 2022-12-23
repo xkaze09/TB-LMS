@@ -3,7 +3,7 @@ package Models;
 import Exceptions.InvalidAccountTypeException;
 
 public abstract class User {
-    // required
+    // Required initializations for user
     private String firstName;
     private String lastName;
     private String username;
@@ -11,6 +11,7 @@ public abstract class User {
     private Integer age;
     private String type;
 
+    // Display user information to the console
     public void viewMyInfo() {
         System.out.printf("""
                 \n=======================
@@ -25,7 +26,7 @@ public abstract class User {
                 this.getType());
     }
 
-    // getters and setters
+    // Getters and setters provide access to user variables
     public String getFirstName() {
         return firstName;
     }
@@ -74,6 +75,15 @@ public abstract class User {
         this.type = type;
     }
 
+    /*
+     * UserBuilder class that creates a User object with the
+     * provided arguments. The class has a constructor that takes in a firstName and
+     * lastName, and the build method creates either a Student or Teacher object
+     * depending on the type argument. The other methods set up the username,
+     * password, and age for the User object. It also provides the ability to build
+     * a user with the correct type.
+     */
+
     public static class UserBuilder {
         private final String firstName;
         private final String lastName;
@@ -111,7 +121,7 @@ public abstract class User {
                 case "teacher" -> {
                     return new Teacher(this);
                 }
-                default -> throw new InvalidAccountTypeException("Invalid account type!");
+                default -> throw new InvalidAccountTypeException("Error: Invalid account type!");
             }
         }
 

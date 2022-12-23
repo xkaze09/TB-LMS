@@ -1,17 +1,20 @@
 package Helpers;
 
+// imports from package
+import java.io.*;
+import java.util.List;
+import java.util.Scanner;
+
+// imports from Java
 import Database.AccountsDB;
 import Models.Feedback;
 import Models.Student;
 import Models.Assignments;
 
-import java.io.*;
-import java.util.List;
-import java.util.Scanner;
-
 public class FileHelper {
     private static final List<Student> studentList = AccountsDB.INSTANCE.getStudentList();
 
+    // Deletes the given file and creates a new file with the header appended to it.
     public static void clearFile(File target, String header) {
         FileWriter writer;
         try {
@@ -29,6 +32,8 @@ public class FileHelper {
         }
     }
 
+    // Copies the contents of the given old file to the given new file and then
+    // deletes the old file.
     public static void replaceFile(String pathOfOldFile, String pathOfNewFile) {
         String sCurrentLine = "";
 
@@ -54,6 +59,7 @@ public class FileHelper {
 
     }
 
+    // Writes the given contents to the target file.
     public static void writeToFile(File target, String... contents) {
         try (FileWriter writer = new FileWriter(target, true)) {
             for (String content : contents) {
@@ -65,6 +71,8 @@ public class FileHelper {
         }
     }
 
+    // Checks the given file for feedbacks and adds them to the given list and
+    // updates the student controller.
     public static void checkForFeedbacks(File feedsCSV, List<Feedback> givenFeeds) {
         try {
             FileWriter feedsCSVWriter;
@@ -115,6 +123,8 @@ public class FileHelper {
         }
     }
 
+    // Checks the given file for assignments and adds them to the given list and
+    // updates the student controller.
     public static void checkForAssignments(File assignmentsCSV, List<Assignments> givenAssignments) {
         try {
             if (assignmentsCSV.createNewFile()) {
