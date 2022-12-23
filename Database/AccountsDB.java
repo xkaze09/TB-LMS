@@ -56,6 +56,15 @@ public class AccountsDB {
         System.out.print("What is your age? ");
         Integer age = Integer.parseInt(scan.nextLine());
 
+        /*
+         * The userbuilder below creates a new user object using the UserBuilder class
+         * and initializes it with
+         * the firstName, lastName, username, password, and age parameters. It then
+         * checks if the user type is "student" and adds the user object to the
+         * studentList and creates a new StudentController object with the user object.
+         * The new user object is then added to the users list and the user's
+         * information is appended to the accountsCSV file.
+         */
         var newUser = new User.UserBuilder(firstName, lastName)
                 .username(username)
                 .password(password)
